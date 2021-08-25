@@ -373,6 +373,31 @@ class Component extends AbstractEntity
 
         return $this;
     }
+    
+    /**
+     * Read price point details belonging to a component
+     * Manually added
+     *
+     * @param int $componentId
+     * @param int $pricePointId
+     *
+     * @return Component
+     */
+    public function getPricePointDetails($componentId, $pricePointId)
+    {
+        $service = $this->getService();
+
+        $response      = $service->request('components/' . (int)$componentId . '/price_points/' . (int)$pricePointId, 'GET');
+        $responseArray = $this->getResponseArray($response);
+
+        if (!$this->isError()) {
+            $this->_data = $responseArray['price_point'];
+        } else {
+            $this->_data = array();
+        }
+
+        return $this;
+    }
 
     /**
      * This normalizes the array for us so we can rely on a consistent structure.
