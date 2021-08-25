@@ -76,7 +76,7 @@ abstract class AbstractEntity implements \ArrayAccess, \Iterator, \Countable
      * @param string $param
      * @param mixed  $value
      *
-     * @return AbstractEntity
+     * @return static
      */
     public function setParam($param, $value)
     {
