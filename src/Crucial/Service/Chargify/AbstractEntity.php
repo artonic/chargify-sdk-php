@@ -332,4 +332,12 @@ abstract class AbstractEntity implements \ArrayAccess, \Iterator, \Countable
     {
         return count($this->_data);
     }
+    
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        return $this->_data;
+    }
 }
