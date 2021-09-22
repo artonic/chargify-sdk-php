@@ -100,6 +100,36 @@ class Transaction extends AbstractEntity
 
         return $this;
     }
+    
+    /**
+     * Can be either asc for ascending or desc for descending order
+     * Manually added
+     *
+     * @param string $direction
+     *
+     * @return Transaction
+     */
+    public function setDirection($direction)
+    {
+        $this->setParam('direction', $direction);
+
+        return $this;
+    }
+
+    /**
+     * Either id or created_at
+     * Manually added
+     *
+     * @param string $orderBy
+     *
+     * @return Transaction
+     */
+    public function setOrderBy($orderBy)
+    {
+        $this->setParam('order_by', $orderBy);
+
+        return $this;
+    }
 
     /**
      * The page number and number of results used for pagination. By default
