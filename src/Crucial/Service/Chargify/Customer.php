@@ -305,6 +305,31 @@ class Customer extends AbstractEntity
 
         return $this;
     }
+    
+    /**
+     * Create payment profile
+     *
+     */
+    public function createPaymentProfile($customerId, $token)
+    {
+        $data = array(
+            'customer_id' => $customerId,
+            'chargify_token' => $token
+        );
+
+        $service       = $this->getService();
+        $rawData       = $this->getRawData(array('payment_profile' => $data));
+        $response      = $service->request('payment_profiles', 'POST', $rawData);
+        $responseArray = $this->getResponseArray($response);
+
+        if (!$this->isError()) {
+            $this->_data = $responseArray['payment_profile'];
+        } else {
+            $this->_data = array();
+        }
+
+        return $this;
+    }
 
     /**
      * Update the customer record in Chargify.
