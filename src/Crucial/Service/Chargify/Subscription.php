@@ -234,6 +234,31 @@ class Subscription extends AbstractEntity
 
         return $this;
     }
+    
+    /**
+     * Set default payment profile
+     * Manually added
+     *
+     *
+     * @param int $subscriptionId
+     * @param int $paymentProfileId
+     *
+     * @return PaymentProfile
+     */
+    public function changeDefaultPaymentProfile($subscriptionId, $paymentProfileId)
+    {
+        $service       = $this->getService();
+        $response      = $service->request('/subscriptions/'.$subscriptionId.'/payment_profiles/'.$paymentProfileId.'/change_payment_profile', 'POST', array());
+        $responseArray = $this->getResponseArray($response);
+
+        if (!$this->isError()) {
+            $this->_data = $responseArray['payment_profile'];
+        } else {
+            $this->_data = array();
+        }
+
+        return $this;
+    }
 
     /**
      * (Optional) Can be used when canceling a subscription (via the HTTP DELETE
